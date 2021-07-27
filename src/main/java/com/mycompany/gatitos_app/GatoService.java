@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -51,8 +52,40 @@ public class GatoService {
                 fondoGato = new ImageIcon(modificada);
             }
             
+            String menu = "Opciones: \n"
+                    + "1. Ver otra imagen \n"
+                    + "2. Favorito \n"
+                    + "3. Volver \n";
+            String[] botones = {"ver otra imagen", "favorito", "volver"};
+            String id_gato = String.valueOf(gatos.getId());
+            String opcion = (String) JOptionPane.showInputDialog(null, menu, id_gato, JOptionPane.INFORMATION_MESSAGE, fondoGato, botones, botones[0]);
+            int seleccion = -1;
+            
+            //Validar que opción selecciona el usuario
+            for(int i=0;i<botones.length;i++){
+                if(opcion.equals(botones[i])){
+                    seleccion = 1;
+                }
+            }
+            
+            switch(seleccion){
+                case 0:
+                    verGatitos();
+                    break;
+                case 1:
+                    favoritoGato(gatos);
+                    break;
+                default:
+                    break;
+            }
+            
+            
         }catch(IOException e){
             System.out.println(e);
         }
+    }
+    
+    public static void favoritoGato(Gato gato){
+        
     }
 }
